@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'live_audio_page.dart';
+import '../../models/room.dart';
+import '../widgets/create_room_btn.dart';
+import '../widgets/room_btn.dart';
 
 class RoomsPage extends StatelessWidget {
   const RoomsPage({super.key});
@@ -7,36 +9,44 @@ class RoomsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Live')),
-      body: Center(
+      appBar: AppBar(
+        title: const Text('Live'),
+        backgroundColor: Colors.lightBlue,
+        centerTitle: true,
+        elevation: 0.0,
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 11),
+        width: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              child: const Text('Start Live'),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const LiveAudioPage(
-                    roomId: '1234',
-                    isHost: true,
-                    userName: 'Mohamed Hassan',
-                    userId: 'userId01',
-                  );
-                }));
-              },
+            const SizedBox(
+              width: double.infinity,
+              child: CreateRoomBtn(),
             ),
-            ElevatedButton(
-              child: const Text('Watch Live'),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const LiveAudioPage(
+            // _______________________________________________________
+            const SizedBox(height: 10),
+            Expanded(
+              child: GridView.builder(
+                itemCount: 16,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Number of rooms per row
+                  crossAxisSpacing: 7,
+                  mainAxisSpacing: 7,
+                  childAspectRatio: 2 / 3,
+                ),
+                itemBuilder: (context, index) => RoomBtn(
+                  room: Room(
+                    hostId: '123',
+                    roomDesc: 'Live Audio Room Live Audio Room Live Audio Room',
+                    hostName: 'John Doe',
                     roomId: '1234',
-                    isHost: false,
-                    userName: 'John Doe2',
-                    userId: 'userId02',
-                  );
-                }));
-              },
+                    userName: 'John Doe',
+                    imgUrl: 'https://pixlr.com/images/index/ai-image-generator-one.webp',
+                    usersNumber: 13,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
@@ -44,6 +54,3 @@ class RoomsPage extends StatelessWidget {
     );
   }
 }
-
-
-

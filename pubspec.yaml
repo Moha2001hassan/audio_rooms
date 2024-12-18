@@ -13,6 +13,8 @@ dependencies:
   firebase_core:
   cloud_firestore:
   firebase_storage:
+  firebase_dynamic_links:
+  http:
 
 dev_dependencies:
   flutter_test:

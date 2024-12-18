@@ -8,11 +8,12 @@ class LiveAudioPage extends StatelessWidget {
     super.key,
     required this.roomId,
     this.isHost = false,
+    this.userAvatarUrl = 'https://i.postimg.cc/L6pdcMqx/me2.jpg',
     required this.userName,
     required this.userId,
   });
 
-  final String roomId, userName, userId;
+  final String roomId, userName, userId, userAvatarUrl;
   final bool isHost;
 
   @override
@@ -27,7 +28,7 @@ class LiveAudioPage extends StatelessWidget {
         config: isHost
             ? ZegoUIKitPrebuiltLiveAudioRoomConfig.host()
             : ZegoUIKitPrebuiltLiveAudioRoomConfig.audience()
-          ..userAvatarUrl = 'https://pixlr.com/images/index/ai-image-generator-one.webp'
+          ..userAvatarUrl = userAvatarUrl
           ..background = background(),
       ),
     );
