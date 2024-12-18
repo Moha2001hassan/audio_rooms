@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/room.dart';
+import '../models/room.dart';
 import '../widgets/create_room_btn.dart';
 import '../widgets/room_btn.dart';
 
@@ -16,7 +16,7 @@ class RoomsPage extends StatelessWidget {
         elevation: 0.0,
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 11),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         width: double.infinity,
         child: Column(
           children: [

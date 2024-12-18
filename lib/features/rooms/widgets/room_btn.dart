@@ -1,5 +1,5 @@
-import 'package:audio_rooms/features/models/room.dart';
 import 'package:flutter/material.dart';
+import '../models/room.dart';
 
 class RoomBtn extends StatelessWidget {
    RoomBtn({super.key, required this.room});
