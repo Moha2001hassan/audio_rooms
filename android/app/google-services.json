@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "101902096600",
+    "project_id": "tourguideapp-x",
+    "storage_bucket": "tourguideapp-x.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101902096600:android:33ee4593fd4079d61a5fad",
+        "android_client_info": {
+          "package_name": "com.example.firebase_bloc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101902096600-72mveulf2dmrmb9jmk7p3fe8hotgp4v3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK4-IkrBJEYOnyLbR38kGDcRVgH5xVwEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101902096600-72mveulf2dmrmb9jmk7p3fe8hotgp4v3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:101902096600:android:151291fd109a35bb1a5fad",
+        "android_client_info": {
+          "package_name": "com.moh7.audio_rooms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "101902096600-72mveulf2dmrmb9jmk7p3fe8hotgp4v3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK4-IkrBJEYOnyLbR38kGDcRVgH5xVwEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "101902096600-72mveulf2dmrmb9jmk7p3fe8hotgp4v3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

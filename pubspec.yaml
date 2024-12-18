@@ -10,6 +10,9 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   zego_uikit_prebuilt_live_audio_room:
+  firebase_core:
+  cloud_firestore:
+  firebase_storage:
 
 dev_dependencies:
   flutter_test:
