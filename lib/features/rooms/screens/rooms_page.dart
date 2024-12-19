@@ -35,9 +35,8 @@ class _RoomsPageState extends State<RoomsPage> {
         width: double.infinity,
         child: Column(
           children: [
-            // if (userRoom == null) const CreateRoomBtn(),
-            // if (userRoom != null)
-              const UserRoomContainer(),
+            if (userRoom == null) const CreateRoomBtn(),
+            if (userRoom != null) UserRoomContainer(room: userRoom!),
             const Divider(),
             Expanded(
               child: GridView.builder(

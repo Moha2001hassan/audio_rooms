@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/room.dart';
+
 class UserRoomContainer extends StatelessWidget {
-  const UserRoomContainer({super.key});
+  const UserRoomContainer({super.key, required this.room});
+
+  final Room room;
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +21,17 @@ class UserRoomContainer extends StatelessWidget {
               color: Colors.blue,
               borderRadius: BorderRadius.circular(5),
             ),
-            child: const Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Column(
                     children: [
                       Text(
-                        'Mohamed Hassan Room',
-                        style: TextStyle(
+                        room.hostName,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -36,8 +40,9 @@ class UserRoomContainer extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        'Live description Live description Live description',
-                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        room.roomDesc,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 12),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -56,10 +61,13 @@ class UserRoomContainer extends StatelessWidget {
                 color: Colors.black.withOpacity(0.6),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.person, color: Colors.white, size: 20),
-                  Text('56', style: TextStyle(color: Colors.white)),
+                  const Icon(Icons.person, color: Colors.white, size: 20),
+                  Text(
+                    room.usersNumber.toString(),
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
             ),
@@ -72,7 +80,7 @@ class UserRoomContainer extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                  'https://pixlr.com/images/generator/how-to-generate.webp',
+                  room.imgUrl,
                   fit: BoxFit.cover,
                   width: 54,
                   height: 54,
