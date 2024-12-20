@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
     ScreenUtil().init(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Rooms App',
+      title: 'Audio Rooms',
       theme: MyAppTheme.lightTheme,
       initialRoute: Routes.splashScreen,
       onGenerateRoute: appRouter.generateRoute,
