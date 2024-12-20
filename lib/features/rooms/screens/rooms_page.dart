@@ -28,40 +28,42 @@ class _RoomsPageState extends State<RoomsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const MyAppBar(),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        width: double.infinity,
-        child: Column(
-          children: [
-            if (userRoom == null) const CreateRoomBtn(),
-            if (userRoom != null) UserRoomContainer(room: userRoom!),
-            const Divider(),
-            Expanded(
-              child: GridView.builder(
-                itemCount: 16,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of rooms per row
-                  crossAxisSpacing: 7,
-                  mainAxisSpacing: 7,
-                  childAspectRatio: 2 / 3,
-                ),
-                itemBuilder: (context, index) => RoomBtn(
-                  room: Room(
-                    hostId: '123',
-                    roomDesc: 'Live Audio Room Live Audio Room Live Audio Room',
-                    hostName: 'John Doe',
-                    roomId: '1234',
-                    userName: 'John Doe',
-                    imgUrl:
-                        'https://pixlr.com/images/index/ai-image-generator-one.webp',
-                    usersNumber: 13,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          width: double.infinity,
+          child: Column(
+            children: [
+              const RoomsAppBar(),
+              if (userRoom == null) const CreateRoomBtn(),
+              if (userRoom != null) UserRoomContainer(room: userRoom!),
+              const Divider(),
+              Expanded(
+                child: GridView.builder(
+                  itemCount: 16,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Number of rooms per row
+                    crossAxisSpacing: 7,
+                    mainAxisSpacing: 7,
+                    childAspectRatio: 2 / 3,
+                  ),
+                  itemBuilder: (context, index) => RoomBtn(
+                    room: Room(
+                      hostId: '123',
+                      roomDesc: 'Live Audio Room Live Audio Room Live Audio Room',
+                      hostName: 'John Doe',
+                      roomId: '1234',
+                      userName: 'John Doe',
+                      imgUrl:
+                          'https://pixlr.com/images/index/ai-image-generator-one.webp',
+                      usersNumber: 13,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

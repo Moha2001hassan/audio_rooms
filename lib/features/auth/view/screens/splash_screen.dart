@@ -21,15 +21,19 @@ class _SplashScreenState extends State<SplashScreen> {
     FirebaseAuthService authService = FirebaseAuthService();
     bool isLoggedIn = await authService.getLoginStatus();
 
-    // Simulate a delay to show the splash screen
     await Future.delayed(const Duration(seconds: 3));
+    if (!mounted) return;
 
     if (isLoggedIn) {
-      context.pushNamedAndRemoveUntil(Routes.roomsPage,
-          predicate: (route) => false);
+      context.pushNamedAndRemoveUntil(
+        Routes.roomsPage,
+        predicate: (route) => false,
+      );
     } else {
-      context.pushNamedAndRemoveUntil(Routes.onboardingScreen,
-          predicate: (route) => false);
+      context.pushNamedAndRemoveUntil(
+        Routes.loginScreen,
+        predicate: (route) => false,
+      );
     }
   }
 
@@ -41,9 +45,9 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/icons/dollars_logo.png',
-              width: 85,
-              height: 85,
+              'assets/icons/audio_icon.png',
+              width: 130,
+              height: 130,
             ),
             const SizedBox(height: 40),
             const Padding(

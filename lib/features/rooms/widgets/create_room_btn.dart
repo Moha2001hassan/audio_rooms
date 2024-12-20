@@ -36,7 +36,7 @@ class CreateRoomBtn extends StatelessWidget {
           'Create Your Room',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),

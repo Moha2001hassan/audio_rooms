@@ -37,7 +37,7 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             // Email
             TextFormField(
-              validator: (value) => value!.isEmpty ? 'emptyField' : null,
+              validator: (value) => value!.isEmpty ? 'EmptyField' : null,
               controller: email,
               keyboardType: TextInputType.emailAddress,
               style: const TextStyle(color: Colors.white),
@@ -54,13 +54,13 @@ class _LoginFormState extends State<LoginForm> {
 
             // Password
             TextFormField(
-              validator: (value) => value!.isEmpty ? 'emptyField' : null,
+              validator: (value) => value!.isEmpty ? 'EmptyField' : null,
               controller: password,
               keyboardType: TextInputType.visiblePassword,
               obscureText: !_isPasswordVisible,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                labelText: 'password',
+                labelText: 'Password',
                 labelStyle: const TextStyle(
                     color: Colors.white,
                     fontSize: 13,
@@ -89,8 +89,11 @@ class _LoginFormState extends State<LoginForm> {
               width: double.infinity,
               child: OutlinedButton(
                 onPressed: () => context.pushNamed(Routes.signupScreen),
-                child: const Text('createAccount',
-                    style: TextStyle(color: Colors.white)),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  overlayColor: Colors.white,
+                ),
+                child: const Text('Create Account', style: TextStyle(color: Colors.white)),
               ),
             ),
             const SizedBox(height: 23),
@@ -129,7 +132,7 @@ class _LoginFormState extends State<LoginForm> {
           },
         ),
       ),
-      validator: (value) => value!.isEmpty ? 'emptyField' : null,
+      validator: (value) => value!.isEmpty ? 'EmptyField' : null,
     );
   }
 }

@@ -15,7 +15,7 @@ class LoginHeader extends StatelessWidget {
         ),
         SizedBox(height: 12),
         Text(
-          'loginTitle',
+          'Login',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 27,

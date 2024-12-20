@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                 },
                 color: Colors.green,
                 child: const Text(
-                  'الدخول كضيف',
+                  'Enter as Guest',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w900,

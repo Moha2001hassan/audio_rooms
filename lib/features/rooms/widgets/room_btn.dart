@@ -5,7 +5,7 @@ class RoomBtn extends StatelessWidget {
    RoomBtn({super.key, required this.room});
 
   final Room room;
-  final borderColor = Colors.blue.shade200;
+  final borderColor = Colors.grey.shade100;
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +61,12 @@ class RoomBtn extends StatelessWidget {
                 children: [
                   Text(
                     room.hostName,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     room.roomDesc,
-                    style: const TextStyle(fontSize: 12),
+                    style: const TextStyle(fontSize: 12, color: Colors.black),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),

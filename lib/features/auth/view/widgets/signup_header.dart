@@ -10,7 +10,7 @@ class SignupHeader extends StatelessWidget {
         Image(image: AssetImage('assets/images/signup_img.png'), height: 200),
         SizedBox(height: 20),
         Text(
-          'signupTitle',
+          'Create an Account',
           style: TextStyle(fontWeight: FontWeight.w900, fontSize: 22, color: Colors.white),
         ),
         SizedBox(height: 15),

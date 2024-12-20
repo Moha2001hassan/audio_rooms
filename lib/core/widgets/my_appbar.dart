@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({super.key});
+class RoomsAppBar extends StatelessWidget {
+  const RoomsAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text('Live'),
-      backgroundColor: Colors.lightBlue,
-      centerTitle: true,
-      elevation: 0.0,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Image.asset(
+          height: 32,
+          'assets/icons/audio_icon.png',
+        ),
+        const Text(
+          'Rooms',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.logout, color: Colors.white),
+          color: Colors.white,
+        ),
+      ],
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

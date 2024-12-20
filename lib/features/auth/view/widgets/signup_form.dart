@@ -35,7 +35,7 @@ class _SignUpFormState extends State<SignUpForm> {
           // Full Name
           buildTextField(
             controller: _nameController,
-            labelText: 'fullName',
+            labelText: 'Full Name',
             prefixIcon: Iconsax.user,
             keyboardType: TextInputType.text,
           ),
@@ -43,7 +43,7 @@ class _SignUpFormState extends State<SignUpForm> {
           // Phone Number
           buildTextField(
             controller: _phoneNumberController,
-            labelText: 'phoneNumber',
+            labelText: 'Phone Number',
             prefixIcon: Iconsax.call,
             keyboardType: TextInputType.phone,
           ),
@@ -51,7 +51,7 @@ class _SignUpFormState extends State<SignUpForm> {
           // Email
           buildTextField(
             controller: _emailController,
-            labelText: 'email',
+            labelText: 'Email',
             prefixIcon: Iconsax.direct,
             keyboardType: TextInputType.emailAddress,
           ),
@@ -73,7 +73,7 @@ class _SignUpFormState extends State<SignUpForm> {
       cursorColor: Colors.blue,
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
-        labelText: 'password',
+        labelText: 'Password',
         prefixIcon: const Icon(Iconsax.password_check, color: Colors.white),
         labelStyle: const TextStyle(
             color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
@@ -84,7 +84,7 @@ class _SignUpFormState extends State<SignUpForm> {
           },
         ),
       ),
-      validator: (value) => value!.isEmpty ? 'emptyField' : null,
+      validator: (value) => value!.isEmpty ? 'EmptyField' : null,
     );
   }
 
