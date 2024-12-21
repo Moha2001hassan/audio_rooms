@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                     predicate: (route) => false,
                   );
                 },
-                color: Colors.green,
+                color: Colors.red,
                 child: const Text(
                   'Enter as Guest',
                   style: TextStyle(

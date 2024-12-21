@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../features/auth/data/remote/auth_firebase.dart';
+import '../../features/auth/view/widgets/logout_bottom_sheet.dart';
+
 class RoomsAppBar extends StatelessWidget {
   const RoomsAppBar({super.key});
 
@@ -8,10 +11,7 @@ class RoomsAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Image.asset(
-          height: 32,
-          'assets/icons/audio_icon.png',
-        ),
+        Image.asset(height: 32, 'assets/icons/audio_icon.png'),
         const Text(
           'Rooms',
           style: TextStyle(
@@ -21,7 +21,12 @@ class RoomsAppBar extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            showConfirmLogoutBottomSheet(
+              context,
+              FirebaseAuthService().logout,
+            );
+          },
           icon: const Icon(Icons.logout, color: Colors.white),
           color: Colors.white,
         ),

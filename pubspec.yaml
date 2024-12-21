@@ -18,7 +18,6 @@ dependencies:
   firebase_dynamic_links:
   http:
   shared_preferences:
-  smooth_page_indicator:
 
 dev_dependencies:
   flutter_test:
