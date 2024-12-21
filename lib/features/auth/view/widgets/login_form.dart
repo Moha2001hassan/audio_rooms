@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../../core/routing/routes.dart';
 import '../../../../features/auth/view/widgets/forget_password_widget.dart';
-import '../../viewmodel/login_data.dart';
+import '../../data/remote/auth_firebase.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({super.key});
@@ -16,15 +16,9 @@ class _LoginFormState extends State<LoginForm> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   GlobalKey<FormState> formState = GlobalKey();
-  late LoginData loginData;
+  FirebaseAuthService authService = FirebaseAuthService();
   bool _isPasswordVisible = false;
   bool _isLoading = false;
-
-  @override
-  void initState() {
-    loginData = LoginData();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +104,7 @@ class _LoginFormState extends State<LoginForm> {
         onPressed: () {
           if (formState.currentState!.validate()) {
             setState(() => _isLoading = true);
-            loginData.login(context, email.text.trim(), password.text.trim());
+            authService.login(context, email.text.trim(), password.text.trim());
           }
         },
         child: const Text('SignIn'),
