@@ -8,7 +8,7 @@ class LiveAudioPage extends StatelessWidget {
     super.key,
     required this.roomId,
     this.isHost = false,
-    this.userAvatarUrl = '',
+    this.userAvatarUrl = 'https://i.postimg.cc/mD5fYTJy/user.jpg',
     required this.userName,
     required this.userId,
   });

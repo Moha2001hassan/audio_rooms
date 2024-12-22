@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/room.dart';
+import '../screens/live_audio_page.dart';
 
 class UserRoomContainer extends StatelessWidget {
   const UserRoomContainer({super.key, required this.room});
@@ -14,42 +15,59 @@ class UserRoomContainer extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          Container(
-            height: 85,
-            width: double.infinity * 0.6,
-            decoration: BoxDecoration(
-              color: Colors.blue,
+          Material(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.blue,
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return LiveAudioPage(
+                    roomId: room.hostId,
+                    isHost: true,
+                    userName: room.hostName,
+                    userId: room.hostId,
+                    userAvatarUrl: room.imgUrl,
+                  );
+                }));
+              },
               borderRadius: BorderRadius.circular(5),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 15),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    children: [
-                      Text(
-                        room.hostName,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+              child: Container(
+                height: 85,
+                width: double.infinity * 0.6,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 17),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          Text(
+                            room.hostName,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(
+                            room.hostId,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
-                      // Text(
-                      //   room.roomDesc,
-                      //   style:
-                      //       const TextStyle(color: Colors.white, fontSize: 12),
-                      //   maxLines: 1,
-                      //   overflow: TextOverflow.ellipsis,
-                      // ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
           Positioned(

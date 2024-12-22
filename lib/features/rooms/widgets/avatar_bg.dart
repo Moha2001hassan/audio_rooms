@@ -1,33 +1,43 @@
 import 'package:flutter/material.dart';
 
 Widget background() {
-  return const Stack(
+  return Stack(
     children: [
-      Positioned(
-          top: 10,
-          left: 10,
-          child: Text(
-            "Live Audio Room",
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: Color(0xff1B1B1B),
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-            ),
-          )),
-      Positioned(
-        top: 10 + 20,
-        left: 10,
-        child: Text(
-          "ID: roomID",
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            color: Color(0xff606060),
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
+      Positioned.fill(
+        child: Image.asset(
+          'assets/images/room_bg.jpg',
+          fit: BoxFit.cover,
         ),
-      )
+      ),
+      const Positioned(
+        top: 35,
+        left: 0,
+        right: 0, // This ensures the column takes the full width of the screen
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center, // Center text horizontally
+          children: [
+            Text(
+              "Live Audio Room",
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 2),
+            Text(
+              "ID: roomId", // Replace dynamically if needed
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
+        ),
+      ),
     ],
   );
 }

@@ -50,7 +50,7 @@ class _RoomsPageState extends State<RoomsPage> {
                 CreateRoomBtn(
                   room: Room(
                     hostId: user!.userId,
-                    hostName: user!.userId,
+                    hostName: user!.fullName,
                     imgUrl: user!.imageUrl ?? '',
                   ),
                 ),
