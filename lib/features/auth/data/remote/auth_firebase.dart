@@ -10,24 +10,19 @@ import '../models/user.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  FirebaseAuthService authService = FirebaseAuthService();
 
   Future<UserCredential> signUpWithEmailAndPassword(
       String email, String password) async {
-    return await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);
+    return await _auth.createUserWithEmailAndPassword(email: email, password: password);
   }
 
   Future<void> login(BuildContext context, String email, String password) async {
     try {
       UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       if (userCredential.user != null && userCredential.user!.emailVerified) {
         String userId = userCredential.user!.uid;
-        MyUser? myUser = await authService.getUserFirestoreData(userId);
+        MyUser? myUser = await getUserFirestoreData(userId);
         await FirebaseAuthService().saveLoginStatus(true);
 
         if (myUser != null) {

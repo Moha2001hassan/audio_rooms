@@ -39,13 +39,13 @@ class UserRoomContainer extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Text(
-                        room.roomDesc,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 12),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      // Text(
+                      //   room.roomDesc,
+                      //   style:
+                      //       const TextStyle(color: Colors.white, fontSize: 12),
+                      //   maxLines: 1,
+                      //   overflow: TextOverflow.ellipsis,
+                      // ),
                     ],
                   ),
                 ),
