@@ -18,6 +18,7 @@ dependencies:
   firebase_dynamic_links:
   http:
   shared_preferences:
+  flutter_bloc:
 
 dev_dependencies:
   flutter_test:

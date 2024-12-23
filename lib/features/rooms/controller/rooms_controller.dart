@@ -61,7 +61,6 @@ class RoomsController {
     }
   }
 
-
   Future<void> saveRoomData(Room room) async {
     try {
       await _firestore.collection('rooms').doc(room.hostId).set(room.toJson());

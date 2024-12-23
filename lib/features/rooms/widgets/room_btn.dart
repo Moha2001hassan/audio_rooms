@@ -4,11 +4,7 @@ import '../models/room.dart';
 import '../screens/live_audio_page.dart';
 
 class RoomBtn extends StatelessWidget {
-  RoomBtn({
-    super.key,
-    required this.room,
-    required this.user,
-  });
+  RoomBtn({super.key, required this.room, required this.user});
 
   final Room room;
   final MyUser user;
@@ -34,9 +30,7 @@ class RoomBtn extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         child: Container(
           padding: const EdgeInsets.all(4),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
           child: Column(
             children: [
               Expanded(
@@ -48,23 +42,31 @@ class RoomBtn extends StatelessWidget {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
                       ),
-                      child: Image.network(room.imgUrl,
-                          width: double.infinity, fit: BoxFit.cover),
+                      child: Image.network(
+                        room.imgUrl,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Positioned(
                       top: 5,
                       right: 5,
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 2),
+                          horizontal: 5,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.6),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.person,
-                                color: Colors.white, size: 20),
+                            const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 20,
+                            ),
                             Text(
                               room.usersNumber.toString(),
                               style: const TextStyle(color: Colors.white),
@@ -79,24 +81,30 @@ class RoomBtn extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 1,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         room.hostName,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                      // Text(
-                      //   room.roomDesc,
-                      //   style:
-                      //       const TextStyle(fontSize: 12, color: Colors.black),
-                      //   overflow: TextOverflow.ellipsis,
-                      //   maxLines: 1,
-                      // ),
+                      Text(
+                        room.hostId,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.black,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
                     ],
                   ),
                 ),

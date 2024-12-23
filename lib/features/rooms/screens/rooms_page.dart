@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/widgets/my_appbar.dart';
 import '../../auth/data/models/user.dart';
 import '../controller/rooms_controller.dart';
+import '../controller/rooms_cubit.dart';
+import '../controller/rooms_state.dart';
 import '../models/room.dart';
 import '../widgets/create_room_btn.dart';
 import '../widgets/room_btn.dart';
+import '../widgets/search_widget.dart';
 import '../widgets/user_room.dart';
 
 class RoomsPage extends StatefulWidget {
@@ -16,21 +20,24 @@ class RoomsPage extends StatefulWidget {
 }
 
 class _RoomsPageState extends State<RoomsPage> {
-  RoomsController controller = RoomsController();
-  Room? userRoom;
-  MyUser? user;
-  List<Room> rooms = [];
+  late RoomsCubit roomsCubit;
+  final TextEditingController searchController = TextEditingController();
+  MyUser? user; // To store user data
+  Room? userRoom; // To store user room
 
   @override
   void initState() {
     super.initState();
-    initializePage();
-  }
-
-  Future<void> initializePage() async {
-    await getUser(); // Ensure `user` is fetched before checking the room
-    await getRoomsList(); // Optionally run this in parallel if independent
-    await checkRoomForUser(); // Now `user` is guaranteed to be non-null
+    roomsCubit = RoomsCubit(RoomsController());
+    roomsCubit.initializePage();
+    roomsCubit.stream.listen((state) {
+      if (state is RoomsLoaded) {
+        setState(() {
+          user = state.user;
+          userRoom = state.userRoom;
+        });
+      }
+    });
   }
 
   @override
@@ -43,6 +50,11 @@ class _RoomsPageState extends State<RoomsPage> {
           child: Column(
             children: [
               const RoomsAppBar(),
+              SearchWidget(
+                roomsCubit: roomsCubit,
+                searchController: searchController,
+              ),
+              const SizedBox(height: 5),
               if (userRoom != null) UserRoomContainer(room: userRoom!),
               if (userRoom == null && user == null)
                 const CreateRoomBtn(room: null),
@@ -56,18 +68,33 @@ class _RoomsPageState extends State<RoomsPage> {
                 ),
               const Divider(),
               Expanded(
-                child: GridView.builder(
-                  itemCount: rooms.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Number of rooms per row
-                    crossAxisSpacing: 7,
-                    mainAxisSpacing: 7,
-                    childAspectRatio: 2 / 3,
-                  ),
-                  itemBuilder: (context, index) {
-                    return user == null
-                        ? RoomBtn(room: rooms[index], user: testUser)
-                        : RoomBtn(room: rooms[index], user: user!);
+                child: BlocBuilder<RoomsCubit, RoomsState>(
+                  bloc: roomsCubit,
+                  builder: (context, state) {
+                    if (state is RoomsLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is RoomsLoaded) {
+                      return GridView.builder(
+                        padding: const EdgeInsets.all(10),
+                        itemCount: state.rooms.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 7,
+                          mainAxisSpacing: 7,
+                          childAspectRatio: 2 / 3,
+                        ),
+                        itemBuilder: (context, index) {
+                          return RoomBtn(
+                            room: state.rooms[index],
+                            user: state.user ?? testUser,
+                          );
+                        },
+                      );
+                    } else if (state is RoomsError) {
+                      return Center(child: Text(state.message));
+                    }
+                    return const SizedBox.shrink();
                   },
                 ),
               ),
@@ -78,37 +105,10 @@ class _RoomsPageState extends State<RoomsPage> {
     );
   }
 
-  Future<void> getRoomsList() async {
-    final fetchedRooms = await controller.getRoomsFromFirestore();
-    if (mounted) {
-      setState(() {
-        rooms = fetchedRooms;
-      });
-    }
-  }
-
-  Future<void> getUser() async {
-    final fetchedUser = await controller.getUserFromFirestore();
-    if (mounted) {
-      setState(() {
-        user = fetchedUser;
-      });
-    }
-  }
-
-  Future<void> checkRoomForUser() async {
-    if (user != null) {
-      final fetchedRoom = await controller.checkIfUserHasRoom(user!.userId);
-      if (mounted) {
-        setState(() {
-          userRoom = fetchedRoom;
-        });
-      }
-    }
-  }
-
   @override
   void dispose() {
+    roomsCubit.close();
+    searchController.dispose();
     super.dispose();
   }
 }
