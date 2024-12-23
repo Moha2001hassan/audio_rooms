@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget background() {
+Widget background(String roomId, String roomName) {
   return Stack(
     children: [
       Positioned.fill(
@@ -9,7 +9,7 @@ Widget background() {
           fit: BoxFit.cover,
         ),
       ),
-      const Positioned(
+       Positioned(
         top: 35,
         left: 0,
         right: 0, // This ensures the column takes the full width of the screen
@@ -17,19 +17,19 @@ Widget background() {
           crossAxisAlignment: CrossAxisAlignment.center, // Center text horizontally
           children: [
             Text(
-              "Live Audio Room",
+              "$roomName Room",
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: 2),
+            const SizedBox(height: 2),
             Text(
-              "ID: roomId", // Replace dynamically if needed
+              "ID: $roomId", // Replace dynamically if needed
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 12,
                 fontWeight: FontWeight.w500,

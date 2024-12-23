@@ -7,13 +7,14 @@ class LiveAudioPage extends StatelessWidget {
   const LiveAudioPage({
     super.key,
     required this.roomId,
+    required this.userId,
     this.isHost = false,
     this.userAvatarUrl = 'https://i.postimg.cc/mD5fYTJy/user.jpg',
     required this.userName,
-    required this.userId,
+    required this.roomName,
   });
 
-  final String roomId, userName, userId;
+  final String roomId, userId, userName, roomName;
   final String userAvatarUrl;
   final bool isHost;
 
@@ -25,12 +26,16 @@ class LiveAudioPage extends StatelessWidget {
         appSign: Utils.zegoAppSign,
         userID: userId,
         userName: userName,
-        roomID: roomId,
+        roomID: '697622',
         config: isHost
             ? ZegoUIKitPrebuiltLiveAudioRoomConfig.host()
             : ZegoUIKitPrebuiltLiveAudioRoomConfig.audience()
           ..userAvatarUrl = userAvatarUrl
-          ..background = background(),
+          ..background = background(roomName, roomId)
+          ..topMenuBar.buttons = [
+            ZegoLiveAudioRoomMenuBarButtonName.minimizingButton,
+            ZegoLiveAudioRoomMenuBarButtonName.leaveButton,
+          ],
       ),
     );
   }

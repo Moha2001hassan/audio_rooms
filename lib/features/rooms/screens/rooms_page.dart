@@ -63,6 +63,7 @@ class _RoomsPageState extends State<RoomsPage> {
                   room: Room(
                     hostId: user!.userId,
                     hostName: user!.fullName,
+                    roomName: user!.fullName,
                     imgUrl: user!.imageUrl ?? '',
                   ),
                 ),

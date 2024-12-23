@@ -22,6 +22,7 @@ class RoomBtn extends StatelessWidget {
               roomId: user.userId,
               isHost: false,
               userName: user.fullName,
+              roomName: room.roomName,
               userId: user.userId,
               userAvatarUrl: user.imageUrl ?? '',
             );
