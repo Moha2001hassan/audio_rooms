@@ -70,4 +70,15 @@ class RoomsController {
       throw Exception("Failed to save room");
     }
   }
+
+  Future<void> updateUsersNumber(String roomId, int newUsersNumber) async {
+    try {
+      final roomRef = _firestore.collection('rooms').doc(roomId);
+
+      await roomRef.update({'usersNumber': newUsersNumber});
+      debugPrint('usersNumber updated successfully.');
+    } catch (e) {
+      debugPrint('Failed to update usersNumber: $e');
+    }
+  }
 }

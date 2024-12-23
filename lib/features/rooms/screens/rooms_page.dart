@@ -64,7 +64,7 @@ class _RoomsPageState extends State<RoomsPage> {
                     hostId: user!.userId,
                     hostName: user!.fullName,
                     roomName: user!.fullName,
-                    imgUrl: user!.imageUrl ?? '',
+                    imgUrl: user!.imageUrl ?? constUserAvatar,
                   ),
                 ),
               const Divider(),

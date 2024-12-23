@@ -12,9 +12,9 @@ Widget background(String roomId, String roomName) {
        Positioned(
         top: 35,
         left: 0,
-        right: 0, // This ensures the column takes the full width of the screen
+        right: 0,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center, // Center text horizontally
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               "$roomName Room",
@@ -27,7 +27,7 @@ Widget background(String roomId, String roomName) {
             ),
             const SizedBox(height: 2),
             Text(
-              "ID: $roomId", // Replace dynamically if needed
+              "ID: $roomId",
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: Colors.black,
