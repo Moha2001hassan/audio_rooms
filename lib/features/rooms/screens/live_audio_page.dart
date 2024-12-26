@@ -4,6 +4,7 @@ import '../../../core/constants/constants.dart';
 import '../../../core/utils.dart';
 import '../controller/rooms_controller.dart';
 import '../widgets/avatar_bg.dart';
+import '../widgets/gift_btn.dart';
 
 class LiveAudioPage extends StatefulWidget {
   const LiveAudioPage({
@@ -46,7 +47,7 @@ class _LiveAudioPageState extends State<LiveAudioPage> {
         appSign: Utils.zegoAppSign,
         userID: widget.userId,
         userName: widget.userName,
-        roomID: '697622',
+        roomID: widget.roomId,
         config: widget.isHost
             ? ZegoUIKitPrebuiltLiveAudioRoomConfig.host()
             : ZegoUIKitPrebuiltLiveAudioRoomConfig.audience()
@@ -55,6 +56,9 @@ class _LiveAudioPageState extends State<LiveAudioPage> {
           ..topMenuBar.buttons = [
             ZegoLiveAudioRoomMenuBarButtonName.minimizingButton,
             ZegoLiveAudioRoomMenuBarButtonName.leaveButton,
+          ]
+          ..bottomMenuBar.audienceExtendButtons = [
+            GiftBtn(userName: widget.userName, hostName: widget.roomName),
           ],
       ),
     );

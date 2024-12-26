@@ -19,7 +19,7 @@ class RoomBtn extends StatelessWidget {
         onTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return LiveAudioPage(
-              roomId: user.userId,
+              roomId: room.hostId,
               isHost: false,
               userName: user.fullName,
               roomName: room.roomName,
