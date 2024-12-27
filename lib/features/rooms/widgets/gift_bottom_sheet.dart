@@ -7,28 +7,49 @@ class GiftBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> hours = [
-      "10:00 AM",
-      "11:00 AM",
-      "12:00 PM",
-      "1:00 PM",
-      "2:00 PM",
-      "3:00 PM",
-      "4:00 PM",
-    ];
+    return Container(
+      padding: const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 25),
+      child: GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4, // 5 items per row
+          crossAxisSpacing: 8.0,
+          mainAxisSpacing: 8.0,
+        ),
+        itemCount: 12,
+        itemBuilder: (context, index) {
+          return const GiftButton();
 
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: hours.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(hours[index]),
-          onTap: () {
-            onHourSelected(hours[index]);
-            Navigator.pop(context);
-          },
-        );
-      },
+          // return ListTile(
+          //   title: Text(hours[index]),
+          //   onTap: () {
+          //     onHourSelected(hours[index]);
+          //     Navigator.pop(context);
+          //   },
+          // );
+        },
+      ),
+    );
+  }
+}
+
+class GiftButton extends StatelessWidget {
+  const GiftButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.grey.shade400,
+      borderRadius: BorderRadius.circular(15),
+      child: InkWell(
+        onTap: (){},
+        borderRadius: BorderRadius.circular(15),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+          child: Image.asset('assets/icons/prize_icon.png'),
+        ),
+      ),
     );
   }
 }

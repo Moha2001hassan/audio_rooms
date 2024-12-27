@@ -81,4 +81,37 @@ class RoomsController {
       debugPrint('Failed to update usersNumber: $e');
     }
   }
+
+  Future<double?> getDollarsNumber() async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final userDoc = await firestore.collection('users').doc(uid).get();
+
+      if (userDoc.exists) {
+        final userData = userDoc.data();
+        if (userData != null) {
+          final user = MyUser.fromMap(userData);
+          return user.dollarsNumber;
+        }
+      }
+      return null;
+    } catch (e) {
+      debugPrint('Error fetching dollarsNumber: $e');
+      return null;
+    }
+  }
+
+  Future<bool> updateDollarsNumber(double newDollarsAmount) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      await firestore.collection('users').doc(uid).update({
+        'dollarsNumber': newDollarsAmount,
+      });
+      return true;
+    } catch (e) {
+      debugPrint('Error updating dollarsNumber: $e');
+      return false;
+    }
+  }
+
 }

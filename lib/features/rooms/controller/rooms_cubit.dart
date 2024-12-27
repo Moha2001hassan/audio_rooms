@@ -36,4 +36,38 @@ class RoomsCubit extends Cubit<RoomsState> {
 
     emit(RoomsLoaded(user: user, userRoom: userRoom, rooms: filteredRooms));
   }
+
+
+
+  Future<void> subtractDollars(double amount) async {
+    if (user == null) {
+      emit(UserDollarsError('User not loaded'));
+      return;
+    }
+    emit(UserDollarsLoading());
+
+    final currentDollars = user!.dollarsNumber;
+    if (currentDollars >= amount) {
+      final newDollarsAmount = currentDollars - amount;
+      final success = await controller.updateDollarsNumber(newDollarsAmount);
+
+      if (success) {
+        // Update local user object
+        user = MyUser(
+          userId: user!.userId,
+          fullName: user!.fullName,
+          email: user!.email,
+          phoneNumber: user!.phoneNumber,
+          dollarsNumber: newDollarsAmount,
+          imageUrl: user!.imageUrl,
+        );
+
+        emit(UserDollarsUpdated(newDollarsAmount));
+      } else {
+        emit(UserDollarsError('Failed to update dollarsNumber in Firestore'));
+      }
+    } else {
+      emit(UserDollarsError('Insufficient balance to subtract $amount dollars'));
+    }
+  }
 }
