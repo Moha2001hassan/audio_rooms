@@ -76,6 +76,7 @@ class _RoomsPageState extends State<RoomsPage> {
                     if (state is RoomsLoading) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is RoomsLoaded) {
+                      if (state.rooms.isEmpty) return const EmptyRooms();
                       return GridView.builder(
                         padding: const EdgeInsets.all(10),
                         itemCount: state.rooms.length,
@@ -112,5 +113,19 @@ class _RoomsPageState extends State<RoomsPage> {
     roomsCubit.close();
     searchController.dispose();
     super.dispose();
+  }
+}
+
+class EmptyRooms extends StatelessWidget {
+  const EmptyRooms({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(
+        'No rooms found',
+        style: TextStyle(fontSize: 20),
+      ),
+    );
   }
 }

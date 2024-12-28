@@ -62,10 +62,11 @@ class GiftButton extends StatelessWidget {
             image: gift.img,
             approved: () async {
               var result =
-                  await GiftsData().sendGift(context, gift.price, 'hostUID');
+                  await GiftsData().sendGift(context, gift.price, hostUID);
               if (result) {
-                onSuccess;
+                onSuccess(gift.name);
               }
+              Navigator.pop(context); // close bottom sheet
             },
           );
         },
