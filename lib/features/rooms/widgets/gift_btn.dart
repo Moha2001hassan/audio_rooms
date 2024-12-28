@@ -3,9 +3,9 @@ import 'package:zego_uikit_prebuilt_live_audio_room/zego_uikit_prebuilt_live_aud
 import 'gift_bottom_sheet.dart';
 
 class GiftBtn extends StatelessWidget {
-  final String userName, hostName;
+  final String userName, hostName, hostUID;
 
-  const GiftBtn({super.key, required this.userName, required this.hostName});
+  const GiftBtn({super.key, required this.userName, required this.hostName, required this.hostUID});
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +15,11 @@ class GiftBtn extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return GiftBottomSheet(
-              onHourSelected: (selectedGift) {
+              onSuccess: (selectedGift) {
                 ZegoUIKitPrebuiltLiveAudioRoomController().message.send(
                     "$userName send a $selectedGift as a gift to $hostName just now!!");
               },
+              hostUID: hostUID,
             );
           },
         );

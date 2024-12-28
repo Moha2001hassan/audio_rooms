@@ -114,4 +114,36 @@ class RoomsController {
     }
   }
 
+  Future<double?> getHostDollarsNumber(String hostUID) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      final userDoc = await firestore.collection('users').doc(hostUID).get();
+
+      if (userDoc.exists) {
+        final userData = userDoc.data();
+        if (userData != null) {
+          final user = MyUser.fromMap(userData);
+          return user.dollarsNumber;
+        }
+      }
+      return null;
+    } catch (e) {
+      debugPrint('Error fetching dollarsNumber: $e');
+      return null;
+    }
+  }
+
+  Future<bool> updateHostDollarsNumber(double newDollars, String hostUID) async {
+    try {
+      final firestore = FirebaseFirestore.instance;
+      await firestore.collection('users').doc(hostUID).update({
+        'dollarsNumber': newDollars,
+      });
+      return true;
+    } catch (e) {
+      debugPrint('Error updating dollarsNumber: $e');
+      return false;
+    }
+  }
+
 }

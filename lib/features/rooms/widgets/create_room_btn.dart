@@ -47,6 +47,7 @@ void createRoomAndNavigate(BuildContext context, Room room) async {
         isHost: true,
         userName: room.hostName,
         userId: room.hostId,
+        hostUID: room.hostUID,
         roomName: room.roomName,
       );
     }));

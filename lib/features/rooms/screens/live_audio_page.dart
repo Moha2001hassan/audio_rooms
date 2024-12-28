@@ -15,9 +15,10 @@ class LiveAudioPage extends StatefulWidget {
     this.userAvatarUrl = constUserAvatar,
     required this.userName,
     required this.roomName,
+    required this.hostUID,
   });
 
-  final String roomId, userId, userName, roomName;
+  final String roomId, userId, userName, roomName, hostUID;
   final String userAvatarUrl;
   final bool isHost;
 
@@ -58,7 +59,7 @@ class _LiveAudioPageState extends State<LiveAudioPage> {
             ZegoLiveAudioRoomMenuBarButtonName.leaveButton,
           ]
           ..bottomMenuBar.audienceExtendButtons = [
-            GiftBtn(userName: widget.userName, hostName: widget.roomName),
+            GiftBtn(userName: widget.userName, hostName: widget.roomName, hostUID : widget.hostUID),
           ],
       ),
     );

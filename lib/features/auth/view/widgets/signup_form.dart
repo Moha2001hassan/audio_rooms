@@ -114,6 +114,7 @@ class _SignUpFormState extends State<SignUpForm> {
       String userId = await generateUniqueUserId();
       MyUser newUser = MyUser(
         userId: userId,
+        userUID: userCredential.user!.uid,
         fullName: _nameController.text.trim(),
         email: _emailController.text.trim(),
         phoneNumber: _phoneNumberController.text.trim(),

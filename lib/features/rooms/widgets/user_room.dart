@@ -27,6 +27,7 @@ class UserRoomContainer extends StatelessWidget {
                     userName: room.hostName,
                     roomName: room.roomName,
                     userId: room.hostId,
+                    hostUID: room.hostUID,
                     userAvatarUrl: room.imgUrl,
                   );
                 }));

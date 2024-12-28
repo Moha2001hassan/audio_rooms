@@ -1,7 +1,7 @@
-class Gift {
-  final String imageName;
+class GiftModel {
+  final String img;
   final String name;
   final double price;
 
-  Gift({required this.imageName, required this.name, required this.price});
+  GiftModel({required this.img, required this.name, required this.price});
 }

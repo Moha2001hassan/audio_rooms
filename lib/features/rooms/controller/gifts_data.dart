@@ -1,19 +1,44 @@
+import 'package:audio_rooms/core/helpers/show_snack_bar.dart';
+import 'package:flutter/material.dart';
+import '../../../core/constants/image_strings.dart';
 import '../models/gift.dart';
+import 'rooms_controller.dart';
 
 class GiftsData {
-  final List<Gift> gifts = [
-    Gift(imageName: 'gift1.png', name: 'Gift 1', price: 0.1),
-    Gift(imageName: 'gift2.png', name: 'Gift 2', price: 1),
-    Gift(imageName: 'gift3.png', name: 'Gift 3', price: 2),
-    Gift(imageName: 'gift4.png', name: 'Gift 4', price: 5),
-    Gift(imageName: 'gift5.png', name: 'Gift 5', price: 10),
-    Gift(imageName: 'gift6.png', name: 'Gift 6', price: 15),
-    Gift(imageName: 'gift7.png', name: 'Gift 7', price: 20),
-    Gift(imageName: 'gift8.png', name: 'Gift 8', price: 30),
-    Gift(imageName: 'gift9.png', name: 'Gift 9', price: 40),
-    Gift(imageName: 'gift10.png', name: 'Gift 10', price: 50),
-    Gift(imageName: 'gift11.png', name: 'Gift 11', price: 70),
-    Gift(imageName: 'gift12.png', name: 'Gift 12', price: 100),
+  RoomsController roomsController = RoomsController();
+  final List<GiftModel> gifts = [
+    GiftModel(img: Gift.redRibbon, name: 'Red Ribbon', price: 0.1),
+    GiftModel(img: Gift.heart, name: 'Heart', price: 0.3),
+    GiftModel(img: Gift.star, name: 'Star', price: 0.5),
+    GiftModel(img: Gift.flowers, name: 'Flowers', price: 0.7),
+    GiftModel(img: Gift.cupcake, name: 'Cupcake', price: 1.0),
+    GiftModel(img: Gift.diamond, name: 'Ring', price: 1.3),
+    GiftModel(img: Gift.crown, name: 'Crown', price: 1.7),
+    GiftModel(img: Gift.treasure, name: 'Treasure', price: 2.0),
+    GiftModel(img: Gift.car, name: 'Car', price: 2.5),
   ];
+
+
+  Future<bool> sendGift(BuildContext context, double giftPrice, String hostUID) async {
+    double userDollars = await roomsController.getDollarsNumber() ?? 0.0;
+    if (userDollars >= giftPrice) {
+      // Minus the gift price from the user's dollars
+      var update = await roomsController.updateDollarsNumber(userDollars - giftPrice);
+      if(update == false) {
+        showSnackBar("There was an error", Colors.red, context);
+        return false;
+      } else {
+        // Add the gift price to the host's dollars
+        var hostDollars = await roomsController.getHostDollarsNumber(hostUID) ?? 0.0;
+        await roomsController.updateHostDollarsNumber(giftPrice/2 + hostDollars, hostUID);
+        showSnackBar("Gift sent successfully", Colors.green, context);
+        return true;
+      }
+    } else {
+      showSnackBar("Your balance is not enough", Colors.red, context);
+      return false;
+    }
+  }
+
 }
 
