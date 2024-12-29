@@ -91,7 +91,7 @@ class RoomBtn extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        room.hostName,
+                        room.roomName,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,

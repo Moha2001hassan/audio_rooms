@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/room.dart';
 import '../screens/live_audio_page.dart';
+import 'edit_room_bottom_sheet.dart';
 
 class UserRoomContainer extends StatelessWidget {
   const UserRoomContainer({super.key, required this.room});
@@ -36,7 +37,8 @@ class UserRoomContainer extends StatelessWidget {
               child: Container(
                 height: 85,
                 width: double.infinity * 0.6,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(5)),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -46,7 +48,7 @@ class UserRoomContainer extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            room.hostName,
+                            room.roomName,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
@@ -106,6 +108,22 @@ class UserRoomContainer extends StatelessWidget {
                   height: 54,
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            left: 0,
+            child: IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  ),
+                  builder: (context) => EditRoomBottomSheet(room: room),
+                );
+              },
+              icon: const Icon(Icons.edit, color: Colors.white, size: 20),
             ),
           ),
         ],
