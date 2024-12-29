@@ -38,7 +38,8 @@ class CreateRoomBtn extends StatelessWidget {
 void createRoomAndNavigate(BuildContext context, Room room) async {
   try {
     // Save the room data
-    await RoomsController().saveRoomData(room);
+    var result = await RoomsController().createRoom(context, room);
+    if (result == false) return;
 
     // Navigate to the LiveAudioPage
     Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -55,3 +56,4 @@ void createRoomAndNavigate(BuildContext context, Room room) async {
     showSnackBar('Failed to create room: $e', Colors.red, context);
   }
 }
+

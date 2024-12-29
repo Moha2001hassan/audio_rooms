@@ -47,61 +47,68 @@ class _RoomsPageState extends State<RoomsPage> {
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           width: double.infinity,
-          child: Column(
-            children: [
-              const RoomsAppBar(),
-              SearchWidget(
-                roomsCubit: roomsCubit,
-                searchController: searchController,
-              ),
-              const SizedBox(height: 5),
-              if (userRoom != null) UserRoomContainer(room: userRoom!),
-              if (userRoom == null && user == null)
-                const CreateRoomBtn(room: null),
-              if (userRoom == null && user != null)
-                CreateRoomBtn(
-                  room: Room(
-                    hostId: user!.userId,
-                    hostUID: user!.userUID,
-                    hostName: user!.fullName,
-                    roomName: user!.fullName,
-                    imgUrl: user!.imageUrl ?? constUserAvatar,
+          child: RefreshIndicator(
+            onRefresh: () async {
+              // Call the cubit's initialization or refresh logic
+              await roomsCubit.initializePage();
+              setState(() {}); // Optionally rebuild UI
+            },
+            child: Column(
+              children: [
+                const RoomsAppBar(),
+                SearchWidget(
+                  roomsCubit: roomsCubit,
+                  searchController: searchController,
+                ),
+                const SizedBox(height: 5),
+                if (userRoom != null) UserRoomContainer(room: userRoom!),
+                if (userRoom == null && user == null)
+                  const CreateRoomBtn(room: null),
+                if (userRoom == null && user != null)
+                  CreateRoomBtn(
+                    room: Room(
+                      hostId: user!.userId,
+                      hostUID: user!.userUID,
+                      hostName: user!.fullName,
+                      roomName: user!.fullName,
+                      imgUrl: user!.imageUrl ?? constUserAvatar,
+                    ),
+                  ),
+                const Divider(),
+                Expanded(
+                  child: BlocBuilder<RoomsCubit, RoomsState>(
+                    bloc: roomsCubit,
+                    builder: (context, state) {
+                      if (state is RoomsLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is RoomsLoaded) {
+                        if (state.rooms.isEmpty) return const EmptyRooms();
+                        return GridView.builder(
+                          padding: const EdgeInsets.all(10),
+                          itemCount: state.rooms.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 7,
+                            mainAxisSpacing: 7,
+                            childAspectRatio: 2 / 3,
+                          ),
+                          itemBuilder: (context, index) {
+                            return RoomBtn(
+                              room: state.rooms[index],
+                              user: state.user ?? testUser,
+                            );
+                          },
+                        );
+                      } else if (state is RoomsError) {
+                        return Center(child: Text(state.message));
+                      }
+                      return const SizedBox.shrink();
+                    },
                   ),
                 ),
-              const Divider(),
-              Expanded(
-                child: BlocBuilder<RoomsCubit, RoomsState>(
-                  bloc: roomsCubit,
-                  builder: (context, state) {
-                    if (state is RoomsLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is RoomsLoaded) {
-                      if (state.rooms.isEmpty) return const EmptyRooms();
-                      return GridView.builder(
-                        padding: const EdgeInsets.all(10),
-                        itemCount: state.rooms.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 7,
-                          mainAxisSpacing: 7,
-                          childAspectRatio: 2 / 3,
-                        ),
-                        itemBuilder: (context, index) {
-                          return RoomBtn(
-                            room: state.rooms[index],
-                            user: state.user ?? testUser,
-                          );
-                        },
-                      );
-                    } else if (state is RoomsError) {
-                      return Center(child: Text(state.message));
-                    }
-                    return const SizedBox.shrink();
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-
+import 'package:flutter/material.dart';
+import '../../../core/helpers/show_snack_bar.dart';
 import '../../auth/data/models/user.dart';
 import '../models/room.dart';
 
@@ -61,13 +61,32 @@ class RoomsController {
     }
   }
 
-  Future<void> saveRoomData(Room room) async {
+  Future<bool> saveRoomData(Room room) async {
     try {
       await _firestore.collection('rooms').doc(room.hostId).set(room.toJson());
-      debugPrint("Room saved successfully with ID: ${room.hostId}");
+      return true;
     } catch (e) {
-      debugPrint("Failed to save room: $e");
-      throw Exception("Failed to save room");
+      return false;
+    }
+  }
+
+  Future<bool> createRoom(BuildContext context, Room room) async {
+    double userDollars = await getDollarsNumber() ?? 0.0;
+    if (userDollars >= 15) {
+      // Minus the room price from the user's dollars
+      var update = await updateDollarsNumber(userDollars - 15);
+      if(update == false) {
+        showSnackBar("حدثت مشكله غير متوقعة", Colors.red, context);
+        return false;
+      } else {
+        // Save the room data
+        await saveRoomData(room);
+        showSnackBar("تم إنشاء الغرفة بنجاح", Colors.green, context);
+        return true;
+      }
+    } else {
+      showSnackBar("للاسف رصيدك اقل من 15 دولار", Colors.red, context);
+      return false;
     }
   }
 
